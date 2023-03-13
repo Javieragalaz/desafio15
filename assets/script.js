@@ -11,9 +11,9 @@ let checkBox = document.getElementById("myCheck1");
 //ARREGLO CON 3 TAREAS INICIALES
 
 let arrayTasks = [
-    { id: Date.now()+1, name: "Pasear a Dexter"},
-    { id: Date.now()+2, name: "Limpiar arenero Chico Terry"},
-    { id: Date.now()+3, name: "Comprar comida de Dexter"},
+    { id: Date.now()+1, name: "Pasear a Dexter", done: false},
+    { id: Date.now()+2, name: "Limpiar arenero Chico Terry", done: false},
+    { id: Date.now()+3, name: "Comprar comida de Dexter", done: false},
 ]
 
 //FUNCIÓN QUE INTERPOLA CON HTML
@@ -37,7 +37,7 @@ const render = () => {
             <label for="myCheck">Checkbox:
             </label>
             
-            <input type="checkbox">
+            <input ${item.done ? "checked" : ""} onchange="completar(${item.id})" type="checkbox">
 
         </div>`
                             
@@ -48,6 +48,7 @@ const render = () => {
     );
 
     suma.innerHTML = contar
+    completed.innerHTML = arrayTasks.filter((item) => item.done).length
   
 }
 
@@ -61,13 +62,26 @@ const eliminar = (id) => {
     render(); //LLAMAR NUEVAMENTE A LA FUNCIÓN PARA ACTUALIZAR ARREGLO
 };
 
+const completar = (id) => {
+
+    arrayTasks.forEach((item) => {
+        if (item.id === id && !item.done) {
+            item.done = true
+        } else if (item.id === id && item.done) {
+            item.done = false
+        }
+    }) 
+
+    render()
+}
 
 
 form.addEventListener("submit", (e) => {  //(e): EVENTO
     e.preventDefault(); //EVITAR QUE EL FORMULARIO SE EJECUTE 
     arrayTasks.push({
         id: Date.now(),
-        name: newTask.value
+        name: newTask.value,
+        done: false,
     });
 
     render(); //LLAMAR NUEVAMENTE A LA FUNCIÓN PARA ACTUALIZAR ARREGLO
@@ -76,10 +90,4 @@ form.addEventListener("submit", (e) => {  //(e): EVENTO
 
    
 });
-
-
-
-
-
-
 
