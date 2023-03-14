@@ -31,15 +31,17 @@ const render = () => {
         total.innerHTML += 
 
                
-        `<div> ${item.id}  ${item.name}
-            <button onclick="eliminar(${item.id})">eliminar
-            </button>
-            <label for="myCheck">Checkbox:
+        `
+        <div>
+          ${item.id}  
+          ${item.name} 
+           <tr><td><button onclick="eliminar(${item.id})">eliminar
+            </button> 
+           <label for="myCheck">Realizada:
             </label>
             
             <input ${item.done ? "checked" : ""} onchange="completar(${item.id})" type="checkbox">
-
-        </div>`
+        `
                             
 
          contar = contar + 1                         
