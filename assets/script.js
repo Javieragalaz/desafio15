@@ -11,47 +11,41 @@ let checkBox = document.getElementById("myCheck1");
 //ARREGLO CON 3 TAREAS INICIALES
 
 let arrayTasks = [
-    { id: Date.now()+1, name: "Pasear a Dexter", done: false},
-    { id: Date.now()+2, name: "Limpiar arenero Chico Terry", done: false},
-    { id: Date.now()+3, name: "Comprar comida de Dexter", done: false},
+    { id: Date.now() + 1, name: "Pasear a Dexter", done: false },
+    { id: Date.now() + 2, name: "Limpiar arenero Chico Terry", done: false },
+    { id: Date.now() + 3, name: "Comprar comida de Dexter", done: false },
 ]
 
 //FUNCIÓN QUE INTERPOLA CON HTML
 
 const render = () => {
-   
-    total.innerHTML = "";
- 
-    
-    let contar = 0
-    
-    
-    arrayTasks.forEach((item) => {
-       
-        total.innerHTML += 
 
-               
-        `
-        <div>
+    total.innerHTML = "";
+
+
+    let contar = 0
+
+
+    arrayTasks.forEach((item) => {
+
+        total.innerHTML +=
+            `<div>
           ${item.id}  
           ${item.name} 
-           <tr><td><button onclick="eliminar(${item.id})">eliminar
-            </button> 
-           <label for="myCheck">Realizada:
-            </label>
-            
-            <input ${item.done ? "checked" : ""} onchange="completar(${item.id})" type="checkbox">
-        `
-                            
 
-         contar = contar + 1                         
-      },
-      
+           <button onclick="eliminar(${item.id})">eliminar</button> 
+
+            <label for="myCheck">Realizada:</label>
+            <input ${item.done ? "checked" : ""} onchange="completar(${item.id})" type="checkbox">` //CHECKBOX
+
+        contar = contar + 1
+    },
+
     );
 
     suma.innerHTML = contar
-    completed.innerHTML = arrayTasks.filter((item) => item.done).length
-  
+    completed.innerHTML = arrayTasks.filter((item) => item.done).length // FUNCIÓN CONTAR CHECKBOX
+
 }
 
 render(); //LLAMO A LA FUNCIÓN RENDER
@@ -59,12 +53,12 @@ render(); //LLAMO A LA FUNCIÓN RENDER
 //FUNCIÓN PARA ELIMINAR OBJETO
 
 const eliminar = (id) => {
-    arrayTasks = arrayTasks.filter((item) => item.id !== id);
-    
+    arrayTasks = arrayTasks.filter((item) => item.id !== id);  //FUNCIÓN ELIMINAR TAREAS
+
     render(); //LLAMAR NUEVAMENTE A LA FUNCIÓN PARA ACTUALIZAR ARREGLO
 };
 
-const completar = (id) => {
+const completar = (id) => { //CONDICIÓN PARA CONTAR CHECKBOX
 
     arrayTasks.forEach((item) => {
         if (item.id === id && !item.done) {
@@ -72,7 +66,7 @@ const completar = (id) => {
         } else if (item.id === id && item.done) {
             item.done = false
         }
-    }) 
+    })
 
     render()
 }
@@ -88,8 +82,6 @@ form.addEventListener("submit", (e) => {  //(e): EVENTO
 
     render(); //LLAMAR NUEVAMENTE A LA FUNCIÓN PARA ACTUALIZAR ARREGLO
     newTask.value = "";
-   
 
-   
 });
 
